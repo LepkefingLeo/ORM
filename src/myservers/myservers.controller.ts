@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, NotFoundException, Delete } from '@nestjs/common';
 import { MyserversService } from './myservers.service';
 import { CreateMyserverDto } from './dto/create-myserver.dto';
 import { UpdateMyserverDto } from './dto/update-myserver.dto';
@@ -31,12 +31,12 @@ export class MyserversController {
     }
   }
 
-  @Get('server/:id')
+  @Delete('server/:id')
   async delete(@Param('id') id: string) {
     try {
       return await this.myserversService.remove(parseInt(id));
     } catch {
       throw new NotFoundException('No such server');
-    }
+    } 
   }
 }
